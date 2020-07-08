@@ -1,0 +1,26 @@
+Akustikgitarre
+Banjo
+Cembalo
+Dudelsack
+ElektrischesKlavier
+Fagott
+GLockenspiel
+Harfe
+Irische Flöte
+Posthorn (Ersatz für Jagdhorn)
+Klarinette
+Laute
+Marimba
+Piccoloflöte (Ersatz für Nasenflöte)
+Oboe
+Panflöte
+Quena
+Rauschflöte
+Saxophon
+Trompete
+Ukulele
+Violine
+Horn (Ersatz für Waldhorn)
+Xylophon
+Piano (Ersatz für Y)
+Ziehharmonika
