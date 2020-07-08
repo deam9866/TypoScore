@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Typography &amp; Music</title>
+  <title>TypoScore</title>
   <style>
     body {
       padding: 0;
@@ -26,13 +26,14 @@
     <nav id ="nav">
         <button class="white" onclick="onPlayBtnClick()">Play</button>
         <button class="black" onclick="onStopBtnClick()">Stop</button>
-        <button class="white" onclick="onRandomNotesBtnClick()">Random Notes</button>
+        <button class="white" onclick="onRandomNotesBtnClick()">Zufällige Noten</button>
         <input type="range" id="randomSlider" min="0" max="1" step="0.1" value="1"/>
-        <button class="black" onclick="onResetNotesBtnClick()">Reset Notes</button>
-        <button class="white" onclick="onAddSystemBtnClick()">Add System</button>
-        <button class="black" onclick="onRemoveSystemBtnClick()">Remove System</button>
-        <button class="white" onclick="onSaveSoundBtnClick()">Save Sound</button>
-        <button class="white" onclick="onClearTextBtnClick()">Clear Text</button>
+        <button class="black" onclick="onResetNotesBtnClick()">Noten zurücksetzen</button>
+        <button class="white" onclick="onAddSystemBtnClick()">Zeile hinzufügen</button>
+        <button class="black" onclick="onRemoveSystemBtnClick()">Zeile löschen</button>
+        <button class="white" onclick="onSaveSoundBtnClick()" id="saveSoundBtn">Sound speichern</button>
+        <button class="white" onclick="onSaveCanvasBtnClick()">Text speichern</button>
+        <button class="black" onclick="onClearTextBtnClick()">Text löschen</button>
     </nav>
     
     <div id="sketch">
@@ -42,7 +43,7 @@
         <button onclick="openCloseInfo()" class="infoBtn">&#9776;</button>
         <div id="sidepanel">
             <button class="collapsible">Beschreibung</button>
-            <p class="content"> </p>
+            <p class="content">...</p>
             <button class="collapsible">Steuerung</button>
             <p class="content">...</p>
             <button class="collapsible">Instrumente</button>

@@ -58,6 +58,7 @@ function setup()
 
 function onPlayBtnClick()
 {
+    document.getElementById("saveSoundBtn").disabled = true;
     let letterArray = collectText();
     playSound(letterArray);
 }
@@ -68,6 +69,7 @@ function onStopBtnClick()
     {
         clearTimeout(playArray[i]);
     }
+    document.getElementById("saveSoundBtn").disabled = false;
 }
 
 function onRandomNotesBtnClick()
@@ -94,6 +96,10 @@ function onRemoveSystemBtnClick()
 function onSaveSoundBtnClick()
 {
     save(soundFile, 'mySound.wav');
+}
+
+function onSaveCanvasBtnClick()
+{
     saveCanvas(cnv);
 }
 
@@ -106,7 +112,7 @@ function onClearTextBtnClick()
 function openCloseInfo()
 {
     let width = document.getElementById("sidepanel").style.width;
-    if (width == "0px")
+    if (width == '' || width == "0px")
         document.getElementById("sidepanel").style.width = "15%";
     else
         document.getElementById("sidepanel").style.width = "0px";
@@ -264,7 +270,8 @@ function playSingleNote(index, letterArray)
         if (index == letterArray.length-1)
         {
             setTimeout(function() {
-                recorder.stop()
+                recorder.stop();
+                document.getElementById("saveSoundBtn").disabled = false;
             }, 400*2);
         }
     }, 400*index);
@@ -359,6 +366,7 @@ function mouseClicked()
             systemArray[i].activate();
         }
         if (mouseX > cnvWidth-50 && mouseX < cnvWidth && mouseY > systemArray[i].getY()+30 && mouseY < systemArray[i].getY()+70) {
+            document.getElementById("saveSoundBtn").disabled = true;
             playSound(systemArray[i].getText());
         }
     }
