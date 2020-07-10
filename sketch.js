@@ -100,7 +100,7 @@ function onSaveSoundBtnClick()
 
 function onSaveCanvasBtnClick()
 {
-    saveCanvas(cnv);
+    saveCanvas(cnv, 'myText', 'png');
 }
 
 function onClearTextBtnClick()
@@ -252,9 +252,11 @@ function playSingleNote(index, letterArray)
         let letterIndex;
         
         letter = letterArray[index].getLetter();
-
         
-        if (letter != ' ')
+        if (letter.charCodeAt(0) >= 65 && letter.charCodeAt(0) <= 90)
+            letter = String.fromCharCode(letter.charCodeAt(0)+32);
+        
+        if (letter.charCodeAt(0) >= 97 && letter.charCodeAt(0) <= 122)
         {
             noteIndex = 14-((letterArray[index].getY()/12.5-1)%16);
 
@@ -281,9 +283,6 @@ function keyTyped()
 {
     background(255);
     System.activeSystem.addLetter(key);
-
-    System.activeSystem.draw();
-    System.activeSystem.writeText();
 }
 
 function keyPressed()
@@ -299,7 +298,7 @@ function keyPressed()
             if (LetterBlock.activeBlock.getY() > System.activeSystem.getY()-3*12.5)
                 LetterBlock.activeBlock.move(-12.5);
         } 
-        else
+        else if (noteMap.size == 0)
         {
             System.activeSystem.moveTextPosition(-12.5);
         }
@@ -314,7 +313,7 @@ function keyPressed()
             if (LetterBlock.activeBlock.getY() < System.activeSystem.getY()+100+3*12.5)
                 LetterBlock.activeBlock.move(12.5);
         } 
-        else
+        else if (noteMap.size == 0)
         {
             System.activeSystem.moveTextPosition(12.5);
         }
@@ -398,8 +397,11 @@ class System
         line(this.x, this.y+75, this.x+cnvWidth-50, this.y+75);
         line(this.x, this.y+100, this.x+cnvWidth-50, this.y+100);
 
-        fill(0);
-        ellipse(this.x + 2.5, this.textPosition, 5, 5)
+        if (noteMap.size == 0)
+        {
+            fill(0);
+            ellipse(this.x + 2.5, this.textPosition, 5, 5)
+        }
 
         image(clef, 0, this.y-25, 80, 160);
         
@@ -439,14 +441,17 @@ class System
     }
     
     addLetter(key) {
-        if (noteMap.size > 0)
+        if (this.text.length < 120)
         {
-            let noteIndex = noteMap.get(key);
-            this.text[this.text.length] = new LetterBlock(100+10*this.text.length, this.y - 3*12.5 + noteIndex*12.5, key, 0, 20);
-        }
-        else
-        {
-            this.text[this.text.length] = new LetterBlock(100+10*this.text.length, this.textPosition, key, 0, 20);
+            if (noteMap.size > 0)
+            {
+                let noteIndex = noteMap.get(key);
+                this.text[this.text.length] = new LetterBlock(80+10*this.text.length, this.y - 3*12.5 + noteIndex*12.5, key, 0, 20);
+            }
+            else
+            {
+                this.text[this.text.length] = new LetterBlock(80+10*this.text.length, this.textPosition, key, 0, 20);
+            }
         }
     }
     

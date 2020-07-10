@@ -39,8 +39,10 @@ body {
     z-index: 1;
     top: 100px;
     right: 0;
+    bottom: 0;
     transition: 0.5s; /* 0.5 second transition effect to slide in the sidepanel */
-    text-align: center;
+    text-align: justify;
+    overflow-y: scroll;
 }
 
 .infoBtn {
@@ -54,7 +56,8 @@ body {
     border: 1px solid black;
 }
 
-#sidepanel p {
+li {
+    list-style-type: none;
 }
 
 .collapsible {
@@ -66,11 +69,12 @@ body {
     background-color: white;
     color: black;
     border: 1px solid black;
-    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .content {
     display: none;
+    margin: 10px;
 }
 
 /* nav bar buttons */

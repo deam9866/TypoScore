@@ -43,29 +43,66 @@
         <button onclick="openCloseInfo()" class="infoBtn">&#9776;</button>
         <div id="sidepanel">
             <button class="collapsible">Beschreibung</button>
-            <p class="content">
+            <div class="content">
               TypoScore ist ein Kompositionstool, welches es ermöglicht, Wörter und Texte in einem Notensystem einzugeben und die musikalische Repräsentation davon abzuspielen.
               Jeder Buchstabe erzeugt dabei einen unterschiedlichen Sound, die Tonhöhe wird durch die vertikalen Position der Buchstaben bestimmt.
               Das Ziel der Anwendung ist es, Zusammenhänge von Typografie und Musik bzw. musikalischer Notation zu entdecken, indem Musik als Alternative zur Sprachausgabe von Schrift genutzt wird.
-            </p>
+            </div>
             <button class="collapsible">Steuerung</button>
-            <p class="content">
-              Der Eingabebereich besteht aus einer beliebigen Anzahl von Notensystemen, in die einzeln Text eingegeben werden kann.
-              Über die Buttons "System hinzufügen" und "System entfernen" kann die Anzahl individuell bestimmt werden, es wird jedoch immer mindestens eine Zeile angezeigt.
-              Um die Texteingabe zu ermöglichen muss ein Notensystem ausgewählt sein. Dies geschieht über einen Klick in den Bereich der jeweiligen Notenlinien.
-              Der Punkt am Anfang jeder Zeile zeigt an, an welche Position geschrieben wird. Diese Position kann über die Pfeiltasten hoch und runter gesetzt werden.
-              Um einen Buchstaben manuell zu verschieben, kann er durch Anklicken ausgewählt werden. Nun kann ebenfalls durch die Pfeiltasten die Position (Pfeil hoch bzw. runter) bzw. Größe (Pfeil links bzw. rechts) eingestellt werden.
-              Über den Pfeil am Ende einer Zeile kann die entsprechende Zeile abgespielt werden. Alternativ können mit dem Play-Button links alle Zeilen nacheinander abgespielt werden.
-              Neben der manuellen Positionierung können auch zufällige Positionen gewählt werden.
-              Durch ein Klick auf den Button "Zufällige Noten" wird jedem Buchstaben eine Note zugewiesen. Über den Slider darunter kann der Bereich der Streuung eingegrenzt werden.
-              Über den Button "Noten zurücksetzen" werden alle Buchstaben wieder auf eine Linie gesetzt.
-              Die Buttons "Text speichern" und "Sound speichern" dienen zum Speichern des Textes/Notensatzes und der Melodien. Letzteres funktioniert dabei nur für die zuletzt abgespielte Melodie.
-              Um Text zu löschen kann innerhalb einer Zeile die "Rück"-Taste genutzt werden oder der Button "Text löschen" um den Text für alle Zeilen zu löschen.
-            </p>
+            <div class="content">
+                <h3>Layout</h3>
+                Der Eingabebereich besteht aus einer beliebigen Anzahl von Notensystemen, in die einzeln Text eingegeben werden kann.
+                Über die Buttons <b>System hinzufügen</b> und <b>System entfernen</b> kann die Anzahl individuell bestimmt werden, es wird jedoch immer mindestens eine Zeile angezeigt.
+                Um die Texteingabe zu ermöglichen muss ein Notensystem ausgewählt sein. Dies geschieht über einen Klick in den Bereich der jeweiligen Notenlinien.
+                <h3>Textpositionierung</h3>
+                Der Punkt am Anfang jeder Zeile zeigt an, an welche Position geschrieben wird. Diese Position kann über die Pfeiltasten hoch und runter gesetzt werden.
+                Um einen Buchstaben manuell zu verschieben, kann er durch Anklicken ausgewählt werden. Nun kann ebenfalls durch die Pfeiltasten die Position (Pfeil hoch bzw. runter) bzw. Größe (Pfeil links bzw. rechts) eingestellt werden.
+                <h3>Wiedergabe</h3>
+                Über den Pfeil am Ende einer Zeile kann die entsprechende Zeile abgespielt werden.
+                Alternativ können mit dem Button <b>Play</b> links alle Zeilen nacheinander abgespielt werden.
+                <h3>Zufallsmodus</h3>
+                Neben der manuellen Positionierung können auch zufällige Positionen gewählt werden.
+                Durch ein Klick auf den Button <b>Zufällige Noten</b> wird jedem Buchstaben eine Note zugewiesen. Über den Slider darunter kann der Bereich der Streuung eingegrenzt werden.
+                Über den Button <b>Noten zurücksetzen</b> werden alle Buchstaben wieder auf eine Linie gesetzt.
+                <h3>Exportieren</h3>
+                Die Buttons <b>Text speichern</b> und <b>Sound speichern</b> dienen zum Speichern des Textes/Notensatzes und der Melodien. Letzteres funktioniert dabei nur für die zuletzt abgespielte Melodie.
+                Um Text zu löschen kann innerhalb einer Zeile die Rück-Taste genutzt werden oder der Button <b>Text löschen</b> um den Text für alle Zeilen zu löschen.
+            </div>
             <button class="collapsible">Instrumente</button>
-            <p class="content">...</p>
+            <div class="content">
+                <ul>
+                    <li>Akustikgitarre</li>
+                    <li>Banjo</li>
+                    <li>Cembalo</li>
+                    <li>Dudelsack</li>
+                    <li>E-Piano</li>
+                    <li>Fagott</li>
+                    <li>Glockenspiel</li>
+                    <li>Harfe</li>
+                    <li>Irische Flöte</li>
+                    <li>Jagdhorn</li>
+                    <li>Klarinette</li>
+                    <li>Laute</li>
+                    <li>Marimba</li>
+                    <li>Nasenflöte</li>
+                    <li>Oboe</li>
+                    <li>Panflöte</li>
+                    <li>Quena</li>
+                    <li>Rauschflöte</li>
+                    <li>Saxophon</li>
+                    <li>Trompete</li>
+                    <li>Ukulele</li>
+                    <li>Violine</li>
+                    <li>Waldhorn</li>
+                    <li>Xylophon</li>
+                    <li>Piano</li>
+                    <li>Ziehharmonika</li>
+                </ul>
+            </div>
             <button class="collapsible">Info</button>
-            <p class="content">...</p>
+            <div class="content">
+                Diese Anwendung ist im Rahmen des Moduls "Kommunikationsdesign" im Bachelor Medieninformatik der Hochschule Düsseldorf entwickelt worden.
+            </div>
         </div>
     </div>
     <script>
