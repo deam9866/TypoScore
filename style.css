@@ -1,6 +1,5 @@
-h1 {
+* {
     font-family: monospace;
-    font-size: 40px;
 }
 
 /* grid template */
@@ -8,6 +7,7 @@ body {
     display: grid;
     grid-template-columns: 15% 70% 15%;
     grid-template-rows: 100px auto;
+    background-image: url("hintergrund.jpeg");
 }
 
 #heading {
@@ -42,6 +42,7 @@ body {
     bottom: 0;
     transition: 0.5s; /* 0.5 second transition effect to slide in the sidepanel */
     text-align: justify;
+    word-spacing:-2px;
     overflow-y: scroll;
 }
 

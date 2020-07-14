@@ -120,7 +120,8 @@ function openCloseInfo()
 
 function draw()
 {    
-    background(255);
+    //background(255);
+    clear();
     for(let i=0; i<systemArray.length; i++)
     {
         systemArray[i].draw();
