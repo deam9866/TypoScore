@@ -446,7 +446,7 @@ class System
         {
             if (noteMap.size > 0)
             {
-                let noteIndex = noteMap.get(key);
+                let noteIndex = noteMap.get(key.toLowerCase());
                 this.text[this.text.length] = new LetterBlock(80+10*this.text.length, this.y - 3*12.5 + noteIndex*12.5, key, 0, 20);
             }
             else
