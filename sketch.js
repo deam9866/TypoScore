@@ -424,7 +424,10 @@ class System
     setLetterPositions() {
         for (let i=0; i<this.text.length; i++) {
             let noteIndex = noteMap.get(this.text[i].getLetter().toLowerCase());
-            this.text[i].setY(this.y - 3*12.5 + noteIndex*12.5);
+            if (noteIndex != null)
+                this.text[i].setY(this.y - 3*12.5 + noteIndex*12.5);
+            else
+                this.text[i].setY(this.textPosition);
         }
     }
     
@@ -448,7 +451,10 @@ class System
             if (noteMap.size > 0)
             {
                 let noteIndex = noteMap.get(key.toLowerCase());
-                this.text[this.text.length] = new LetterBlock(80+10*this.text.length, this.y - 3*12.5 + noteIndex*12.5, key, 0, 20);
+                if (noteIndex != null)
+                    this.text[this.text.length] = new LetterBlock(80+10*this.text.length, this.y - 3*12.5 + noteIndex*12.5, key, 0, 20);
+                else
+                    this.text[this.text.length] = new LetterBlock(80+10*this.text.length, this.textPosition, key, 0, 20);
             }
             else
             {
