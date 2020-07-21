@@ -282,8 +282,8 @@ function playSingleNote(index, letterArray)
 
 function keyTyped()
 {
-    background(255);
     System.activeSystem.addLetter(key);
+    return false;
 }
 
 function keyPressed()
