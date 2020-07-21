@@ -105,6 +105,7 @@ function onSaveCanvasBtnClick()
 
 function onClearTextBtnClick()
 {
+    onStopBtnClick();
     clearText();
 }
 
