@@ -422,7 +422,7 @@ class System
     
     setLetterPositions() {
         for (let i=0; i<this.text.length; i++) {
-            let noteIndex = noteMap.get(this.text[i].getLetter());
+            let noteIndex = noteMap.get(this.text[i].getLetter().toLowerCase());
             this.text[i].setY(this.y - 3*12.5 + noteIndex*12.5);
         }
     }
