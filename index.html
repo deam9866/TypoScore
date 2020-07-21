@@ -122,7 +122,12 @@
                         content.style.display = "block";
                 }
             });
-        }
+        }  
+        document.querySelectorAll("button").forEach(function(item) {
+          item.addEventListener('focus', function() {
+            this.blur();
+          })
+        });
     </script>
 </body>
 
