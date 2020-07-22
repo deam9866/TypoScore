@@ -2,19 +2,40 @@
 <html lang="">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TypoScore</title>
-  <style>
-    body {
-      padding: 0;
-      margin: 0;
-    }
-  </style>
-  <link rel="stylesheet" href="style.css">
-  <script src="p5js/p5.js"></script>
-  <script src="p5js/addons/p5.sound.minv0311.js"></script>
-  <script src="sketch.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TypoScore</title>
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+    <script src="p5js/p5.js"></script>
+    <script src="p5js/addons/p5.sound.minv0311.js"></script>
+    <script src="sketch.js"></script>
+    <script>
+        /* set the width of the sidebar to 250px (show it) */
+        function openCloseInfo()
+        {
+            let width = document.getElementById("sidepanel").style.width;
+            if (width == '' || width == "0px")
+                document.getElementById("sidepanel").style.width = "15%";
+            else
+                document.getElementById("sidepanel").style.width = "0px";
+        }
+        /* open/close collapsible */
+        function toggleCollapisble(c)
+        {
+            c.classList.toggle("active");
+            let content = c.nextElementSibling;
+            if (content.style.display === "block")
+                content.style.display = "none";
+            else
+                content.style.display = "block";
+        }  
+    </script>
 </head>
 
 <body>
@@ -43,13 +64,13 @@
     <div id="info">
         <button onclick="openCloseInfo()" class="infoBtn">&#9776;</button>
         <div id="sidepanel">
-            <button class="collapsible">Beschreibung</button>
+            <button class="collapsible" onclick="toggleCollapisble(this)">Beschreibung</button>
             <div class="content">
               TypoScore ist ein Kompositionstool, welches es ermöglicht, Texte in ein Notensystem einzugeben und die musikalische Repräsentation davon abzuspielen.
               Sound und Tonhöhe werden dabei durch die Typografie bestimmt.
               Ziel der Anwendung ist es, Zusammenhänge von Typografie und Musik zu entdecken, indem Musik als Alternative zu Sprache genutzt wird.
             </div>
-            <button class="collapsible">Steuerung</button>
+            <button class="collapsible" onclick="toggleCollapisble(this)">Steuerung</button>
             <div class="content">
                 <h3>Layout</h3>
                 Der Eingabebereich besteht aus einem oder mehreren Notensystemen, in die einzeln Text eingegeben werden kann.
@@ -73,7 +94,7 @@
                 Die Buttons <b>Text speichern</b> und <b>Sound speichern</b> dienen zum Speichern des Textes/Notensatzes und der Melodien.
                 Letzteres funktioniert dabei nur für die zuletzt abgespielte Melodie.
             </div>
-            <button class="collapsible">Instrumente</button>
+            <button class="collapsible" onclick="toggleCollapisble(this)">Instrumente</button>
             <div class="content">
                 <ul>
                     <li>A/Ä - Altflöte</li>
@@ -104,26 +125,14 @@
                     <li>Z - Ziehharmonika</li>
                 </ul>
             </div>
-            <button class="collapsible">Info</button>
+            <button class="collapsible" onclick="toggleCollapisble(this)">Info</button>
             <div class="content">
                 Diese Anwendung ist im Rahmen des Moduls "Kommunikationsdesign" im Bachelor Medieninformatik der Hochschule Düsseldorf entwickelt worden.
             </div>
         </div>
     </div>
     <script>
-        var collapsibles = document.getElementsByClassName("collapsible");
-        for (let i=0; i < collapsibles.length; i++)
-        {
-            collapsibles[i].addEventListener("click", function() {
-                this.classList.toggle("active");
-                var content = this.nextElementSibling;
-                    if (content.style.display === "block") {
-                        content.style.display = "none";
-                    } else {
-                        content.style.display = "block";
-                }
-            });
-        }  
+        // disable button clicking by pressing space bar (disables button focus)
         document.querySelectorAll("button").forEach(function(item) {
           item.addEventListener('focus', function() {
             this.blur();

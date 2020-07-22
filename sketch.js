@@ -1,28 +1,32 @@
+// array for loaded sounds
 let sounds = [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]];
-//let durations = [1/2, 1/4, 1/6, 1/8, 3/8];
-
-let noteMap = new Map();
-
+// needed for playing notes (buffer-like)
 let playArray = [];
 
+// array for displayed systems
 let systemArray = [];
+// current selected system
 let activeSystem;
 
-let syllableArray = [];
-let syllableCounter = 0;
-
+// actual width of the canvas area
 let cnvWidth;
+// actual height of the heading area
 let headingHeight;
 
+// recorder variables
 let recorder;
 let soundFile;
 
+// percentage for displaying loading
 let percentage = 0;
 
+// container for clef image
 let clef;
 
+// container for canvas
 let cnv;
 
+// change percentage on successful loading
 function onSoundLoadSuccess(e){
     percentage += 1/390*100;
 }
@@ -32,10 +36,14 @@ function onSoundLoadError(e){
 function whileLoading(e){
 }
 
+// preload images
 function preload(){
     clef = loadImage("notenschluessel.png")
 }
 
+/**
+ * setup function for initialization
+ */
 function setup()
 {    
     // load sound files
@@ -50,11 +58,13 @@ function setup()
     headingHeight = document.getElementById("heading").offsetHeight;
     cnv = createCanvas(cnvWidth, windowHeight-headingHeight);
     cnv.parent('sketch');
-    
-    
+
+    // create first system
     systemArray[0] = new System(0, 50);
     systemArray[0].activate();
 }
+
+/********** button listeners **********/
 
 function onPlayBtnClick()
 {
@@ -108,16 +118,9 @@ function onClearTextBtnClick()
     clearText();
 }
 
-/* Set the width of the sidebar to 250px (show it) */
-function openCloseInfo()
-{
-    let width = document.getElementById("sidepanel").style.width;
-    if (width == '' || width == "0px")
-        document.getElementById("sidepanel").style.width = "15%";
-    else
-        document.getElementById("sidepanel").style.width = "0px";
-}
-
+/**
+ * draw function executed every frame
+ */
 function draw()
 {    
     //background(255);
@@ -137,6 +140,9 @@ function draw()
     }
 }
 
+/**
+ * add a new system
+ */
 function addSystem()
 {
     let systemY = 50 + systemArray.length*(100+100);
@@ -146,6 +152,9 @@ function addSystem()
     systemArray[systemArray.length-1].activate();
 }
 
+/**
+ * remove the last system
+ */
 function removeSystem()
 {
     if (systemArray.length > 1)
@@ -153,7 +162,7 @@ function removeSystem()
 }
 
 /**
- * set the y value of each letter to its value from noteMap
+ * set the y value of each letter to a random value
  */
 function setLetterPositions()
 {
@@ -164,12 +173,10 @@ function setLetterPositions()
 }
 
 /**
- * resets all letter y positions to current cursor height
+ * resets all letter y positions to current cursor position
  */
 function resetRandomNotes()
 {
-    noteMap = new Map();
-    
     for(let i=0; i<systemArray.length; i++)
     {
         systemArray[i].resetLetterPositions();
@@ -187,6 +194,9 @@ function clearText()
     }
 }
 
+/**
+ * collect text from all systems to global array
+ */
 function collectText()
 {
     let letterArray = [];
@@ -203,7 +213,7 @@ function collectText()
 }
 
 /**
- * play the sound to the curent input word
+ * play the sound of the given letters
  */
 function playSound(letterArray)
 {
@@ -221,6 +231,7 @@ function playSound(letterArray)
 
 /**
  * plays a single note from soundsArray at the given index
+ * letterArray needed for checking if last letter of text
  */
 function playSingleNote(index, letterArray)
 {
@@ -232,9 +243,17 @@ function playSingleNote(index, letterArray)
         
         letter = letterArray[index].getLetter();
         
+        // change upper case letters to lower case
         if (letter.charCodeAt(0) >= 65 && letter.charCodeAt(0) <= 90)
             letter = String.fromCharCode(letter.charCodeAt(0)+32);
         
+        // change umlauts
+        if ([228, 196].includes(letter.charCodeAt(0))) letter = 'a';
+        else if ([246, 214].includes(letter.charCodeAt(0))) letter = 'o';
+        else if ([252, 220].includes(letter.charCodeAt(0))) letter = 'u';
+        else if (letter.charCodeAt(0) == 223) letter = 's';
+        
+        // if valid letter
         if (letter.charCodeAt(0) >= 97 && letter.charCodeAt(0) <= 122)
         {
             noteIndex = 14-((letterArray[index].getY()/12.5-1)%16);
@@ -258,12 +277,17 @@ function playSingleNote(index, letterArray)
     }, 400*index);
 }
 
+/**
+ * on key press - only 'printable keys' (ignoring system keys like arrow keys, ctrl, ...)
+ */
 function keyTyped()
 {
     System.activeSystem.addLetter(key);
-    return false;
 }
 
+/**
+ * on key press
+ */
 function keyPressed()
 {
     if (keyCode === BACKSPACE)
@@ -277,7 +301,7 @@ function keyPressed()
             if (LetterBlock.activeBlock.getY() > System.activeSystem.getY()-3*12.5)
                 LetterBlock.activeBlock.move(-12.5);
         } 
-        else if (noteMap.size == 0)
+        else if (!document.getElementById("typeRandom").checked)
         {
             System.activeSystem.moveTextPosition(-12.5);
         }
@@ -292,7 +316,7 @@ function keyPressed()
             if (LetterBlock.activeBlock.getY() < System.activeSystem.getY()+100+3*12.5)
                 LetterBlock.activeBlock.move(12.5);
         } 
-        else if (noteMap.size == 0)
+        else if (!document.getElementById("typeRandom").checked)
         {
             System.activeSystem.moveTextPosition(12.5);
         }
@@ -318,6 +342,9 @@ function keyPressed()
     }
 }
 
+/**
+ * on mouse click
+ */
 function mouseClicked()
 {
     let letterClicked = false;
@@ -350,6 +377,10 @@ function mouseClicked()
     }
 }
 
+/**
+ * class for systems
+ * stores position, status (active), entered text
+ */
 class System
 {
     static activeSystem;
@@ -483,6 +514,10 @@ class System
     }
 }
 
+/**
+ * class for single letters
+ * stores position, status (active), content
+ */
 class LetterBlock
 {
     static activeBlock;
@@ -555,6 +590,9 @@ class LetterBlock
     }
 }
 
+/**
+ * load all needed sounds from the sound folder
+ */
 function loadSounds()
 { 
     for (let i = 65; i<=90; i++)
