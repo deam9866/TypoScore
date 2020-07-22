@@ -86,6 +86,7 @@ button.white {
     color: black;
     border: 1px solid black;
     margin-top: 10px;
+    border-radius: 3px;
 }
 
 button.black {
@@ -95,6 +96,7 @@ button.black {
     color: white;
     border: 1px solid black;
     margin-top: 10px;
+    border-radius: 3px;
 }
 
 button:hover:enabled {
@@ -108,12 +110,11 @@ button:disabled {
 
 /* slider */
 #randomSlider {
-    width: 146px;
-    height: 10;
-    -webkit-appearance: none;
+    width: 75%;
     appearance: none;
     background: lightgray;
     outline: none;
+    margin-top: 10px;
 }
 
 #randomSlider::-webkit-slider-thumb {

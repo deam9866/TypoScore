@@ -74,7 +74,6 @@ function onStopBtnClick()
 
 function onRandomNotesBtnClick()
 {
-    chooseRandomNotes(document.getElementById("randomSlider").value);
     setLetterPositions();
 }
 
@@ -201,28 +200,6 @@ function collectText()
         letterArray[letterArray.length] = new LetterBlock(0, 0, ' ', 0, 0);
     }
     return letterArray;
-}
-
-/**
- * set random note value to each letter
- */
-function chooseRandomNotes(sliderValue)
-{
-    lowerBound = 0.5 - (0.5 * sliderValue);
-    upperBound = 0.5 + (0.5 * sliderValue);
-    noteMap.set('a', round(random(lowerBound, upperBound) * (sounds[0].length-1)));noteMap.set('b', round(random(lowerBound, upperBound) * (sounds[0].length-1)));
-    noteMap.set('c', round(random(lowerBound, upperBound) * (sounds[0].length-1)));noteMap.set('d', round(random(lowerBound, upperBound) * (sounds[0].length-1)));
-    noteMap.set('e', round(random(lowerBound, upperBound) * (sounds[0].length-1)));noteMap.set('f', round(random(lowerBound, upperBound) * (sounds[0].length-1)));
-    noteMap.set('g', round(random(lowerBound, upperBound) * (sounds[0].length-1)));noteMap.set('h', round(random(lowerBound, upperBound) * (sounds[0].length-1)));
-    noteMap.set('i', round(random(lowerBound, upperBound) * (sounds[0].length-1)));noteMap.set('j', round(random(lowerBound, upperBound) * (sounds[0].length-1)));
-    noteMap.set('k', round(random(lowerBound, upperBound) * (sounds[0].length-1)));noteMap.set('l', round(random(lowerBound, upperBound) * (sounds[0].length-1)));
-    noteMap.set('m', round(random(lowerBound, upperBound) * (sounds[0].length-1)));noteMap.set('n', round(random(lowerBound, upperBound) * (sounds[0].length-1)));
-    noteMap.set('o', round(random(lowerBound, upperBound) * (sounds[0].length-1)));noteMap.set('p', round(random(lowerBound, upperBound) * (sounds[0].length-1)));
-    noteMap.set('q', round(random(lowerBound, upperBound) * (sounds[0].length-1)));noteMap.set('r', round(random(lowerBound, upperBound) * (sounds[0].length-1)));
-    noteMap.set('s', round(random(lowerBound, upperBound) * (sounds[0].length-1)));noteMap.set('t', round(random(lowerBound, upperBound) * (sounds[0].length-1)));
-    noteMap.set('u', round(random(lowerBound, upperBound) * (sounds[0].length-1)));noteMap.set('v', round(random(lowerBound, upperBound) * (sounds[0].length-1)));
-    noteMap.set('w', round(random(lowerBound, upperBound) * (sounds[0].length-1)));noteMap.set('x', round(random(lowerBound, upperBound) * (sounds[0].length-1)));
-    noteMap.set('y', round(random(lowerBound, upperBound) * (sounds[0].length-1)));noteMap.set('z', round(random(lowerBound, upperBound) * (sounds[0].length-1)));
 }
 
 /**
@@ -399,7 +376,7 @@ class System
         line(this.x, this.y+75, this.x+cnvWidth-50, this.y+75);
         line(this.x, this.y+100, this.x+cnvWidth-50, this.y+100);
 
-        if (noteMap.size == 0)
+        if (document.getElementById("typeRandom").checked)
         {
             fill(0);
             ellipse(this.x + 2.5, this.textPosition, 5, 5)
@@ -422,12 +399,21 @@ class System
     }
     
     setLetterPositions() {
-        for (let i=0; i<this.text.length; i++) {
-            let noteIndex = noteMap.get(this.text[i].getLetter().toLowerCase());
-            if (noteIndex != null)
-                this.text[i].setY(this.y - 3*12.5 + noteIndex*12.5);
-            else
-                this.text[i].setY(this.textPosition);
+        for (let i=0; i<this.text.length; i++)
+        {
+            let sliderValue = document.getElementById("randomSlider").value;
+            let lowerBound = 0 - sliderValue;
+            let upperBound = 0 + sliderValue;
+            let randomInt = round(random(lowerBound, upperBound));
+            
+            let position = this.textPosition + randomInt * 12.5;
+            
+            if (position < this.y - 3*12.5)
+                position = this.y - 3*12.5
+            else if (position > this.y - 3*12.5 + 175)
+                position = this.y - 3*12.5 + 175
+            
+            this.text[i].setY(position);
         }
     }
     
@@ -446,15 +432,25 @@ class System
     }
     
     addLetter(key) {
-        if (this.text.length < 120)
+        if (80+10*this.text.length < cnvWidth-60)
         {
-            if (noteMap.size > 0)
+            let typeRandom = document.getElementById("typeRandom").checked;
+            
+            if (typeRandom)
             {
-                let noteIndex = noteMap.get(key.toLowerCase());
-                if (noteIndex != null)
-                    this.text[this.text.length] = new LetterBlock(80+10*this.text.length, this.y - 3*12.5 + noteIndex*12.5, key, 0, 20);
-                else
-                    this.text[this.text.length] = new LetterBlock(80+10*this.text.length, this.textPosition, key, 0, 20);
+                let sliderValue = document.getElementById("randomSlider").value;
+                let lowerBound = 0 - sliderValue;
+                let upperBound = 0 + sliderValue;
+                let randomInt = round(random(lowerBound, upperBound));
+
+                let position = this.textPosition + randomInt * 12.5;
+
+                if (position < this.y - 3*12.5)
+                    position = this.y - 3*12.5
+                else if (position > this.y - 3*12.5 + 175)
+                    position = this.y - 3*12.5 + 175
+
+                this.text[this.text.length] = new LetterBlock(80+10*this.text.length, position, key, 0, 20);
             }
             else
             {

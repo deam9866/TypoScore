@@ -27,7 +27,8 @@
         <button class="white" onclick="onPlayBtnClick()">Play</button>
         <button class="black" onclick="onStopBtnClick()">Stop</button>
         <button class="white" onclick="onRandomNotesBtnClick()">Zufällige Noten</button>
-        <input type="range" id="randomSlider" min="0" max="1" step="0.1" value="1"/>
+        <input type="range" id="randomSlider" min="0" max="7" step="1" value="7"/>
+        <label for="typeRandom">Eingabe zufällig<input type="checkbox" id="typeRandom"/></label>
         <button class="black" onclick="onResetNotesBtnClick()">Noten zurücksetzen</button>
         <button class="white" onclick="onAddSystemBtnClick()">Zeile hinzufügen</button>
         <button class="black" onclick="onRemoveSystemBtnClick()">Zeile löschen</button>
@@ -75,32 +76,32 @@
             <button class="collapsible">Instrumente</button>
             <div class="content">
                 <ul>
-                    <li>Altflöte</li>
-                    <li>Banjo</li>
-                    <li>Cembalo</li>
-                    <li>Dudelsack</li>
-                    <li>E-Piano</li>
-                    <li>Fagott</li>
-                    <li>Glockenspiel</li>
-                    <li>Harfe</li>
-                    <li>Irische Flöte</li>
-                    <li>Jagdhorn</li>
-                    <li>Klarinette</li>
-                    <li>Laute</li>
-                    <li>Marimba</li>
-                    <li>Nasenflöte</li>
-                    <li>Oboe</li>
-                    <li>Panflöte</li>
-                    <li>Quena</li>
-                    <li>Rauschflöte</li>
-                    <li>Saxophon</li>
-                    <li>Trompete</li>
-                    <li>Ukulele</li>
-                    <li>Violine</li>
-                    <li>Waldhorn</li>
-                    <li>Xylophon</li>
-                    <li>Piano</li>
-                    <li>Ziehharmonika</li>
+                    <li>A/Ä - Altflöte</li>
+                    <li>B - Banjo</li>
+                    <li>C - Cembalo</li>
+                    <li>D - Dudelsack</li>
+                    <li>E - E-Piano</li>
+                    <li>F - Fagott</li>
+                    <li>G - Glockenspiel</li>
+                    <li>H - Harfe</li>
+                    <li>I - Irische Flöte</li>
+                    <li>J - Jagdhorn</li>
+                    <li>K - Klarinette</li>
+                    <li>L - Laute</li>
+                    <li>M - Marimba</li>
+                    <li>N - Nasenflöte</li>
+                    <li>O/Ö - Oboe</li>
+                    <li>P - Panflöte</li>
+                    <li>Q - Quena</li>
+                    <li>R - Rauschflöte</li>
+                    <li>S/ß - Saxophon</li>
+                    <li>T - Trompete</li>
+                    <li>U/Ü - Ukulele</li>
+                    <li>V - Violine</li>
+                    <li>W - Waldhorn</li>
+                    <li>X - Xylophon</li>
+                    <li>Y - Piano</li>
+                    <li>Z - Ziehharmonika</li>
                 </ul>
             </div>
             <button class="collapsible">Info</button>
