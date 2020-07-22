@@ -145,7 +145,7 @@ function draw()
  */
 function addSystem()
 {
-    let systemY = 50 + systemArray.length*(100+100);
+    let systemY = 50 + systemArray.length*(200); // vertical offset: 50, vertical spacing: 200
     if (systemY > cnv.height)
         cnv.resize(cnvWidth, cnv.height+200);
     systemArray[systemArray.length] = new System(0, systemY)
@@ -256,16 +256,17 @@ function playSingleNote(index, letterArray)
         // if valid letter
         if (letter.charCodeAt(0) >= 97 && letter.charCodeAt(0) <= 122)
         {
-            noteIndex = 14-((letterArray[index].getY()/12.5-1)%16);
+            noteIndex = 15-((letterArray[index].getY()/12.5)%16);
 
             letterIndex = (letter.charCodeAt(0))%97;
             
             note = sounds[letterIndex][noteIndex];
             note.setVolume((letterArray[index].getWidth()*0.08)-1.1);
             note.play();
-                        
-            console.log("index: " + playArray.length + " letter: " +letter);
-            console.log("note: " + noteIndex);
+            
+            //console.log("note: " + noteIndex);
+            //console.log("index: " + playArray.length + " letter: " +letter);
+            console.log((letterArray[index].getWidth()*0.08)-1.1);
         }
         if (index == letterArray.length-1)
         {
@@ -298,7 +299,7 @@ function keyPressed()
     {
         if (LetterBlock.activeBlock != null) {
             
-            if (LetterBlock.activeBlock.getY() > System.activeSystem.getY()-3*12.5)
+            if (LetterBlock.activeBlock.getY() > System.activeSystem.getY()-3*12.5) // 3 possible notes above system
                 LetterBlock.activeBlock.move(-12.5);
         } 
         else if (!document.getElementById("typeRandom").checked)
@@ -313,7 +314,7 @@ function keyPressed()
 
         if (LetterBlock.activeBlock != null) {
             
-            if (LetterBlock.activeBlock.getY() < System.activeSystem.getY()+100+3*12.5)
+            if (LetterBlock.activeBlock.getY() < System.activeSystem.getY()+100+3*12.5) // 3 possible notes below system
                 LetterBlock.activeBlock.move(12.5);
         } 
         else if (!document.getElementById("typeRandom").checked)
@@ -407,7 +408,7 @@ class System
         line(this.x, this.y+75, this.x+cnvWidth-50, this.y+75);
         line(this.x, this.y+100, this.x+cnvWidth-50, this.y+100);
 
-        if (document.getElementById("typeRandom").checked)
+        if (!document.getElementById("typeRandom").checked)
         {
             fill(0);
             ellipse(this.x + 2.5, this.textPosition, 5, 5)
@@ -439,10 +440,10 @@ class System
             
             let position = this.textPosition + randomInt * 12.5;
             
-            if (position < this.y - 3*12.5)
-                position = this.y - 3*12.5
-            else if (position > this.y - 3*12.5 + 175)
-                position = this.y - 3*12.5 + 175
+            if (position < this.y - 3*12.5) // 3 possible notes above system
+                position = this.y - 3*12.5 // max height
+            else if (position > this.y - 3*12.5 + 175) // 3 possible values below system
+                position = this.y - 3*12.5 + 175 // min height
             
             this.text[i].setY(position);
         }
@@ -463,7 +464,7 @@ class System
     }
     
     addLetter(key) {
-        if (80+10*this.text.length < cnvWidth-60)
+        if (80+10*this.text.length < cnvWidth-60) // max line size
         {
             let typeRandom = document.getElementById("typeRandom").checked;
             
@@ -476,10 +477,10 @@ class System
 
                 let position = this.textPosition + randomInt * 12.5;
 
-                if (position < this.y - 3*12.5)
-                    position = this.y - 3*12.5
-                else if (position > this.y - 3*12.5 + 175)
-                    position = this.y - 3*12.5 + 175
+                if (position < this.y - 3*12.5) // 3 possible notes above system
+                    position = this.y - 3*12.5 // max height
+                else if (position > this.y - 3*12.5 + 175) // 3 possible values below system
+                    position = this.y - 3*12.5 + 175 // min height
 
                 this.text[this.text.length] = new LetterBlock(80+10*this.text.length, position, key, 0, 20);
             }
@@ -491,7 +492,7 @@ class System
     }
     
     moveTextPosition(value) {
-        if (this.textPosition+value > this.y - 4*12.5 && this.textPosition+value < this.y + 100 + 4*12.5)
+        if (this.textPosition+value >= this.y - 3*12.5 && this.textPosition+value <= this.y + 100 + 3*12.5)
             this.textPosition = this.textPosition+value;
     }
     
