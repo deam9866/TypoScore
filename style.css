@@ -125,3 +125,7 @@ button:disabled {
     background: black;
     cursor: pointer;
 }
+
+label {
+    display: block;
+}
