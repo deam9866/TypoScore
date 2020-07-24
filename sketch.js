@@ -291,6 +291,11 @@ function keyTyped()
  */
 function keyPressed()
 {
+    if (keyCode == 32)
+    {
+        System.activeSystem.addLetter(key);
+        return false;
+    }
     if (keyCode === BACKSPACE)
     {
         System.activeSystem.getText().pop();
