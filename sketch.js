@@ -146,7 +146,7 @@ function draw()
 function addSystem()
 {
     let systemY = 50 + systemArray.length*(200); // vertical offset: 50, vertical spacing: 200
-    if (systemY > cnv.height)
+    if (systemY > cnv.height-200)
         cnv.resize(cnvWidth, cnv.height+200);
     systemArray[systemArray.length] = new System(0, systemY)
     systemArray[systemArray.length-1].activate();
